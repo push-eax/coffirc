@@ -4,9 +4,9 @@ one channel at a time, and is really horrendous.
 
 ## Commands
 
-/connect <server> <port>
+/connect \<server\> \<port\>
 /disconnect
-/join <channel> \[<key>\]
+/join \<channel\> \[<key>\]
 /part
 /nick
 /list
