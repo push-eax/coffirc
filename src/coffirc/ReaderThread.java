@@ -1,7 +1,3 @@
-/*
- * Copyright 2016 Kiernan Roche
- * All rights reserved.
- */
 package coffirc;
 
 import java.io.*;

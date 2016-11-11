@@ -1,8 +1,3 @@
-/*
- * Copyright 2016 Kiernan Roche
- * All rights reserved.
- */
-
 package coffirc;
 
 import java.io.*;
@@ -16,7 +11,7 @@ import java.util.Scanner;
 public class Coffirc {
 
     /**
-     * @param args the command line arguments
+     * @param args
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
@@ -38,7 +33,6 @@ public class Coffirc {
                 //System.out.print("> ");
                 
                 if (rawInput.charAt(0) == '/') {
-                    //System.out.println("Command entered!");
                     String[] commArr = rawInput.substring(1).split(" ");
                     String command = commArr[0];
                     
