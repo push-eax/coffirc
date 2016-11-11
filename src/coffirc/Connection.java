@@ -10,7 +10,6 @@ import java.net.*;
 
 public class Connection {
 
-    public int stage;
     private Socket socket;
     private BufferedWriter writer;
     private BufferedReader reader;
