@@ -1,6 +1,5 @@
 # coffirc
-A feature-incomplete Java IRC client that I wrote in 4 hours, supports 
-one channel at a time, and is really horrendous.
+A feature-incomplete Java IRC client. It supports one channel at a time and can't handle disconnections properly.
 
 ## Commands
 
