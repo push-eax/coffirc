@@ -15,9 +15,9 @@ public class Connection {
     private BufferedWriter writer;
     private BufferedReader reader;
     
-    private String nick = "default";
-    private String login = "default";
-    public String channel;
+    private String nick = "test_nickname";
+    private String login = "test_nickname";
+    private String channel;
     
     public Connection(String server, int port) throws IOException {
         socket = new Socket(server, port);
