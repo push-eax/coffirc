@@ -3,7 +3,8 @@ package coffirc;
 import java.io.*;
 
 /**
- * Handles reading of received messages from IRC server. Instantiated by the Connection class in a new thread for non-blocking output.
+ * Handles reading of received messages from IRC server.
+ * Instantiated by the Connection class in a new thread for non-blocking output.
  * @author kroche
  */
 
