@@ -1,5 +1,3 @@
-package coffirc;
-
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -50,7 +48,7 @@ public class Coffirc {
                         }
                     }
                     else {
-                        if (connection == null) {
+                        if (connection == null && command.equals("quit") == false) {
                             System.err.println("Not connected.");
                         }
                         else {

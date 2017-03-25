@@ -1,5 +1,3 @@
-package coffirc;
-
 import java.io.*;
 
 /**
