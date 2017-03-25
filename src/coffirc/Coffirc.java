@@ -52,12 +52,11 @@ public class Coffirc {
 							System.err.println("Not connected.");
 						}
 						else {
-							// I really hate if-else-if ladders but switch:case doesn't work here
 							System.out.println(command);
-							string commands[] = {"disconnect", "quit", "nick", "part", "join", "list"};
+							String commands[] = {"disconnect", "quit", "nick", "part", "join", "list"};
 							int cindex = 666;
 							for(int i = 0; i<commands.length; i++){
-								if(command == commands[i]) cindex = i;
+								if(command.equals(commands[i])) cindex = i;
 							}
 							switch(cindex){
 								case 0:
@@ -65,8 +64,8 @@ public class Coffirc {
 									System.err.println("Disconnected.");
 									break;
 								case 1:
-									System.out.println("Program terminated.");
-									exit(0);
+									System.out.println("Program quit gracefully. Goodbye!");
+									System.exit(0);
 									break;
 								case 2:
 									connection.changeNick(commArr[1]);
@@ -84,6 +83,14 @@ public class Coffirc {
 									break;
 								case 5:
 									connection.listChans();
+									break;
+								default:
+									System.err.print("Bad command. Valid commands are:");
+									for(int i = 0; i<commands.length; i++){
+										System.err.print(' '+commands[i]);
+									}
+									System.err.println();
+									break;
 							}
 						}
 					}
