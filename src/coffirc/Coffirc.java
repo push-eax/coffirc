@@ -54,7 +54,7 @@ public class Coffirc {
 						else {
 							System.out.println(command);
 							String commands[] = {"disconnect", "quit", "nick", "part", "join", "list"};
-							int cindex = 666;
+							int cindex = -1;
 							for(int i = 0; i<commands.length; i++){
 								if(command.equals(commands[i])) cindex = i;
 							}
