@@ -19,6 +19,9 @@ public class Coffirc {
 		
 		System.out.println("coffirc v0.1.0");
 		
+		//In order to consitantly represent common problems, we should use a list of error
+		//messages for the more standard ones. (ex. not connected)
+		
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
 				/*
@@ -49,7 +52,7 @@ public class Coffirc {
 					}
 					else {
 						if (connection == null && command.equals("quit") == false) {
-							System.err.println("Not connected.");
+							System.err.println("Not connected. Use the /connect command to start.");
 						}
 						else {
 							System.out.println(command);
@@ -87,7 +90,7 @@ public class Coffirc {
 								default:
 									System.err.print("Bad command. Valid commands are:");
 									for(int i = 0; i<commands.length; i++){
-										System.err.print(' '+commands[i]);
+										System.err.print(" /"+commands[i]);
 									}
 									System.err.println();
 									break;
@@ -100,7 +103,7 @@ public class Coffirc {
 						connection.sendPrivmsg(rawInput);
 					}
 					else {
-						System.err.println("Not connected.");
+						System.err.println("Not connected. Use the /connect command to start.");
 					}
 				}
 			}
