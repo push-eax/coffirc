@@ -42,7 +42,7 @@ public class ReaderThread extends Thread {
 				if (line.startsWith("PING")) {
 					// PING response
 					writer.write("PONG " + line.substring(5) + "\r\n");
-					System.out.println("PONG " + line.substring(5) + "\r\n");
+					//System.out.println("PONG " + line.substring(5) + "\r\n");
 					writer.flush();
 				}
 				else {
