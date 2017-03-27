@@ -7,17 +7,16 @@ import java.util.Scanner;
  * @author kroche
  */
 public class Coffirc {
-
 	/**
 	 * @param args
 	 * @throws java.lang.Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		
+		String version = "0.1.1";
 		String rawInput;
 		Connection connection = null;
 		
-		System.out.println("coffirc v0.1.0");
+		System.out.println("coffirc v"+version);
 		
 		//In order to consitantly represent common problems, we should use a list of error
 		//messages for the more standard ones. (ex. not connected)
@@ -40,7 +39,7 @@ public class Coffirc {
 					if ("connect".equals(command)){
 						if (connection == null){
 							if (commArr.length == 3){
-								connection = new Connection(commArr[1], Integer.parseInt(commArr[2])); 
+								connection = new Connection(commArr[1], Integer.parseInt(commArr[2]), version); 
 							}
 							else {	  
 								System.err.println("Usage: /connect <server> <port>");

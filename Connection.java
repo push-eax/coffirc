@@ -16,7 +16,7 @@ public class Connection {
 	private String login = "test_nickname";
 	private String channel;
 	
-	public Connection(String server, int port) throws IOException {
+	public Connection(String server, int port, String version) throws IOException {
 		socket = new Socket(server, port);
 		writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -27,7 +27,7 @@ public class Connection {
 		
 		// ident to ircd
 		writer.write("NICK " + nick + "\r\n");
-		writer.write("USER " + login + " 8 * : coffirc v0.1.0\r\n");
+		writer.write("USER " + login + " 8 * : coffirc v"+version+"\r\n");
 		writer.flush();
 		
 	}
