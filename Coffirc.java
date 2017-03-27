@@ -15,6 +15,7 @@ public class Coffirc {
 		String version = "0.1.1";
 		String rawInput;
 		Connection connection = null;
+		PrintWriter logfile = new PrintWriter(".coffirc.debug.log");
 		
 		System.out.println("coffirc v"+version);
 		
@@ -39,7 +40,7 @@ public class Coffirc {
 					if ("connect".equals(command)){
 						if (connection == null){
 							if (commArr.length == 3){
-								connection = new Connection(commArr[1], Integer.parseInt(commArr[2]), version); 
+								connection = new Connection(commArr[1], Integer.parseInt(commArr[2]), version, logfile); 
 							}
 							else {	  
 								System.err.println("Usage: /connect <server> <port>");

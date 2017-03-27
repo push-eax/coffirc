@@ -10,10 +10,12 @@ public class ReaderThread extends Thread {
 	private Thread t;
 	private final BufferedReader reader;
 	private final BufferedWriter writer;
+	public PrintWriter logfile;
 
-	ReaderThread(BufferedReader reader, BufferedWriter writer) {
+	ReaderThread(BufferedReader reader, BufferedWriter writer, PrintWriter logf) {
 		this.reader = reader;
 		this.writer = writer;
+		logfile = logf;
 	}
 
 	public void run() {
@@ -46,7 +48,7 @@ public class ReaderThread extends Thread {
 					writer.flush();
 				}
 				else {
-					// Print each line the bot receives.
+					// Print each line the client receives.
 					System.out.println(line);
 				}
 			}
