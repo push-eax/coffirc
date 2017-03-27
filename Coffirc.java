@@ -12,7 +12,7 @@ public class Coffirc {
 	 * @throws java.lang.Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String version = "0.1.2";
+		String version = "0.1.2b";
 		String rawInput;
 		Connection connection = null;
 		//PrintWriter logfile = new PrintWriter(".coffirc.debug.log");

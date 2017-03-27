@@ -130,8 +130,80 @@ public class ReaderThread extends Thread {
 					case 1:
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[lineparts.length-1].split(":");
-						String message = lineparts2[lineparts2.length-1];
-						System.out.println(nickcolor+"["+lineparts[0]+"] "+resetcolor+message);
+						line = lineparts2[lineparts2.length-1];
+						System.out.print(nickcolor+"["+lineparts[0]+"] "+resetcolor);
+						for(int ii = 0; ii<line.length(); ii++){
+							if(line.charAt(ii) == '\003'){
+								if(line.length()>ii+2){
+									colorcode=16;
+									if(Character.isDigit(line.charAt(ii+1))){
+										colorcode = Character.getNumericValue(line.charAt(ii+1));
+										ii++;
+										if(Character.isDigit(line.charAt(ii+1))){
+											colorcode += (Character.getNumericValue(line.charAt(ii+1))*10);
+											ii++;
+										}
+									}
+									switch(colorcode){
+									case 0:
+										System.out.print(whitecolor);
+										break;
+									case 1:
+										System.out.print(blackcolor);
+										break;
+									case 2:
+										System.out.print(navycolor);
+										break;
+									case 3:
+										System.out.print(greencolor);
+										break;
+									case 4:
+										System.out.print(redcolor);
+										break;
+									case 5:
+										System.out.print(marooncolor);
+										break;
+									case 6:
+										System.out.print(purplecolor);
+										break;
+									case 7:
+										System.out.print(olivecolor);
+										break;
+									case 8:
+										System.out.print(yellowcolor);
+										break;
+									case 9:
+										System.out.print(lgreencolor);
+										break;
+									case 10:
+										System.out.print(tealcolor);
+										break;
+									case 11:
+										System.out.print(cyancolor);
+										break;
+									case 12:
+										System.out.print(rbluecolor);
+										break;
+									case 13:
+										System.out.print(magentacolor);
+										break;
+									case 14:
+										System.out.print(greycolor);
+										break;
+									case 15:
+										System.out.print(lgreycolor);
+										break;
+									default:
+										System.out.print(resetcolor);
+										break;
+									}
+								}else{
+									System.out.print(resetcolor);
+									ii++;
+								}
+							} else System.out.print(line.charAt(ii));
+						}
+						System.out.println(resetcolor);
 						break;
 					case 2:
 						lineparts = line.substring(1).split("!");
@@ -141,12 +213,15 @@ public class ReaderThread extends Thread {
 						for(int ii = 0; ii<line.length(); ii++){
 							if(line.charAt(ii) == '\003'){
 								if(line.length()>ii+2){
-									tempbuff = "";
-									tempbuff += line.charAt(ii+1);
-									tempbuff += line.charAt(ii+2);
-									ii+=2;
-									try{colorcode = Integer.parseInt(tempbuff);}
-									catch(NumberFormatException e){colorcode = 16;}
+									colorcode=16;
+									if(Character.isDigit(line.charAt(ii+1))){
+										colorcode = Character.getNumericValue(line.charAt(ii+1));
+										ii++;
+										if(Character.isDigit(line.charAt(ii+1))){
+											colorcode += (Character.getNumericValue(line.charAt(ii+1))*10);
+											ii++;
+										}
+									}
 									switch(colorcode){
 									case 0:
 										System.out.print(whitecolor);
