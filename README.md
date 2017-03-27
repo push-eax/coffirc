@@ -1,6 +1,7 @@
 # coffirc
 A feature-incomplete Java IRC client. It supports one channel at a time.
 
+
 ## Commands
 
 /connect \<server\> \<port\>
