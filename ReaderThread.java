@@ -228,8 +228,16 @@ public class ReaderThread extends Thread {
 						break;
 					case 1: //PRIVMSG
 						lineparts = line.substring(1).split("!");
-						lineparts2 = lineparts[lineparts.length-1].split(":");
-						line = lineparts2[lineparts2.length-1];
+						line = "";
+						for(int i = 1; i<lineparts.length; i++){
+							line += "!"+lineparts[i];
+						}
+						lineparts2 = line.substring(1).split(":");
+						line = "";
+						for(int i = 1; i<lineparts2.length; i++){
+							line += ":"+lineparts2[i];
+						}
+						line = line.substring(1);
 						System.out.print(nickcolor+"["+lineparts[0]+"] "+resetcolor);
 						printcolor(line);
 						System.out.print(resetcolor);
