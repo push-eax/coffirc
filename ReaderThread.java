@@ -208,8 +208,8 @@ public class ReaderThread extends Thread {
 					// Print each line the client receives.
 					logfile.write(line+"\n");
 					logfile.flush();
-					//                    0       1          2       3       4      5      6      7      8      9      10     11     12     13     14     15     16     17     18
-					String keywords[] = {"JOIN", "PRIVMSG", "PART", "QUIT", "332", "333", "353", "366", "375", "372", "005", "251", "255", "265", "266", "252", "253", "254", "NOTICE"};
+					//                    0       1          2       3       4      5      6      7      8      9      10     11     12     13     14     15     16     17     18        19          20
+					String keywords[] = {"JOIN", "PRIVMSG", "PART", "QUIT", "332", "333", "353", "366", "375", "372", "005", "251", "255", "265", "266", "252", "253", "254", "NOTICE", "MODE", "NICK"};
 					int keyword = -1;
 					for(int i = 0; i<keywords.length; i++){
 						if(line.contains(keywords[i])){
@@ -221,12 +221,12 @@ public class ReaderThread extends Thread {
 					line = line.replace("\002", "");
 					
 					switch(keyword){
-					case 0:
+					case 0: //JOIN
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[1].split(":");
 						System.out.println(lineparts[0] + " has joined "+lineparts2[lineparts2.length-1]);
 						break;
-					case 1:
+					case 1: //PRIVMSG
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[lineparts.length-1].split(":");
 						line = lineparts2[lineparts2.length-1];
@@ -234,11 +234,11 @@ public class ReaderThread extends Thread {
 						printcolor(line);
 						System.out.print(resetcolor);
 						break;
-					case 2:
+					case 2: //PART
 						lineparts = line.substring(1).split("!");
 						System.out.println(lineparts[0] + " left the channel.");
 						break;
-					case 3:
+					case 3: //QUIT
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[lineparts.length-1].split(":");
 						System.out.println(lineparts[0] + " quit ("+lineparts2[lineparts2.length-1]+")");
@@ -250,6 +250,7 @@ public class ReaderThread extends Thread {
 						printcolor(lineparts[lineparts.length-1]);
 					case 5: //Topic set time
 					case 7: //End of names list
+					case 19: //user mode
 						break;
 					case 8://MOTD start line
 					case 9://MOTD
@@ -279,6 +280,11 @@ public class ReaderThread extends Thread {
 							System.out.print(lineparts[i]+ " ");
 						}
 						System.out.println();
+						break;
+					case 20:
+						lineparts = line.substring(1).split("!");
+						lineparts2 = line.split(":");
+						System.out.println(nickcolor + lineparts[0] + " has changed their nick to " + lineparts2[lineparts2.length-1] + resetcolor);
 						break;
 					default:
 						printcolor(line);
