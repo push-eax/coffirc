@@ -12,7 +12,7 @@ public class Coffirc {
 	 * @throws java.lang.Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String version = "0.1.4";//On adding a new feature, incrment lowest minor.
+		String version = "0.1.5";//On adding a new feature, incrment lowest minor.
 		                         //On fixing existing feature, append/increase letter
 		                         //On simply changing stuff without committing, append -dev
 		                         //When committing, make sure there is no -dev suffix
@@ -67,10 +67,16 @@ public class Coffirc {
 							switch(cindex){
 								case 0:
 									connection.close();
-									System.err.println("Disconnected.");
+									connection = null;
+									if(connection !=null) System.err.println("Failed to disconnect.");
+									else System.err.println("Disconnected.");
 									break;
 								case 1:
 									System.out.println("Program quit gracefully. Goodbye!");
+									if(connection != null){
+										connection.close();
+										connection = null;
+									}
 									//logfile.close();
 									System.exit(0);
 									break;
