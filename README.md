@@ -1,5 +1,5 @@
 # coffirc
-A feature-incomplete Java IRC client. It supports one channel at a time and can't handle disconnections properly.
+A feature-incomplete Java IRC client. It supports one channel at a time.
 
 ## Commands
 
