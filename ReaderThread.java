@@ -25,6 +25,8 @@ public class ReaderThread extends Thread {
 
 	public void run() {
 		System.out.println("Started run");
+		String lineparts[];
+		String lineparts2[];
 		try {
 			String line;
 			// read until connected
@@ -59,7 +61,34 @@ public class ReaderThread extends Thread {
 				}
 				else {
 					// Print each line the client receives.
-					System.out.println(line);
+					String keywords[] = {"JOIN", "PRIVMSG", "PART"};
+					int keyword = -1;
+					for(int i = 0; i<keywords.length; i++){
+						if(line.contains(keywords[i])){
+							keyword = i;
+							break;
+						}
+					}
+					switch(keyword){
+					case 0:
+						lineparts = line.substring(1).split("!");
+						lineparts2 = lineparts[1].split(":");
+						System.out.println(lineparts[0] + " has joined "+lineparts2[lineparts2.length-1]);
+						break;
+					case 1:
+						lineparts = line.substring(1).split("!");
+						lineparts2 = lineparts[lineparts.length-1].split(":");
+						String message = lineparts2[lineparts2.length-1];
+						System.out.println("["+lineparts[0]+"] "+message);
+						break;
+					case 2:
+						lineparts = line.substring(1).split("!");
+						System.out.println(lineparts[0] + " left the channel.");
+						break;
+					default:
+						System.out.println(line);
+						break;
+					}
 					logfile.write(line+"\n");
 					logfile.flush();
 				}
