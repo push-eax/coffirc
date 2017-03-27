@@ -10,12 +10,17 @@ public class ReaderThread extends Thread {
 	private Thread t;
 	private final BufferedReader reader;
 	private final BufferedWriter writer;
-	public PrintWriter logfile;
+	public Writer logfile;
 
-	ReaderThread(BufferedReader reader, BufferedWriter writer, PrintWriter logf) {
+	ReaderThread(BufferedReader reader, BufferedWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
-		logfile = logf;
+		try{
+			logfile = new PrintWriter(".coffirc.debug.log");
+		}
+		catch(FileNotFoundException e){
+			System.err.println("Log file error");
+		}
 	}
 
 	public void run() {
@@ -24,7 +29,8 @@ public class ReaderThread extends Thread {
 			String line;
 			// read until connected
 			while ((line = reader.readLine()) != null) {
-				//System.out.println(line);
+				logfile.write(line+"\n");
+				logfile.flush();
 				if (line.contains("004")) {
 					System.out.println("We are now logged in.");
 					break;
@@ -32,11 +38,14 @@ public class ReaderThread extends Thread {
 				else if (line.startsWith("PING")) {
 					// PING response
 					writer.write("PONG " + line.substring(5) + "\r\n");
-					//System.out.println("PONG " + line.substring(5) + "\r\n");
+					logfile.write("PONG " + line.substring(5) + "\r\n");
+					logfile.flush();
 					writer.flush();
 				}
 				else if (line.contains("433")) {
 					System.out.println("Nickname is already in use.");
+					logfile.write("Nick in use, user needs must select another\n");
+					logfile.flush();
 					return;
 				}
 			}
@@ -44,14 +53,18 @@ public class ReaderThread extends Thread {
 				if (line.startsWith("PING")) {
 					// PING response
 					writer.write("PONG " + line.substring(5) + "\r\n");
-					//System.out.println("PONG " + line.substring(5) + "\r\n");
+					logfile.write("PONG " + line.substring(5) + "\r\n");
+					logfile.flush();
 					writer.flush();
 				}
 				else {
 					// Print each line the client receives.
 					System.out.println(line);
+					logfile.write(line+"\n");
+					logfile.flush();
 				}
 			}
+			//logfile.close();
 		} catch (IOException e) {
 		}
 	}

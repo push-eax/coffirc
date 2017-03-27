@@ -15,16 +15,16 @@ public class Connection {
 	private String nick = "test_nickname";
 	private String login = "test_nickname";
 	private String channel;
-	public PrintWriter logfile;
+	//public PrintWriter logfile;
 	
-	public Connection(String server, int port, String version, PrintWriter logf) throws IOException {
+	public Connection(String server, int port, String version) throws IOException {
 		socket = new Socket(server, port);
 		writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		logfile = logf;
+		//logfile = new PrintWriter(".coffirc.debug.log");;
 		
 		// start reader thread
-		ReaderThread readerthread = new ReaderThread(reader, writer, logf);
+		ReaderThread readerthread = new ReaderThread(reader, writer);
 		readerthread.start();
 		
 		// ident to ircd
