@@ -12,7 +12,10 @@ public class Coffirc {
 	 * @throws java.lang.Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String version = "0.1.2b";
+		String version = "0.1.3";//On adding a new feature, incrment lowest minor.
+		                         //On fixing existing feature, append/increase letter
+		                         //On simply changing stuff without committing, append -dev
+		                         //When committing, make sure there is no -dev suffix
 		String rawInput;
 		Connection connection = null;
 		//PrintWriter logfile = new PrintWriter(".coffirc.debug.log");
