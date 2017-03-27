@@ -1,5 +1,6 @@
 # coffirc
-A minimalistic CLI IRC client in Java.
+A feature-incomplete Java IRC client. It supports one channel at a time.
+
 
 ## Commands
 
