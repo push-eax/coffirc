@@ -234,8 +234,13 @@ public class ReaderThread extends Thread {
 						}
 						lineparts2 = line.substring(1).split(":");
 						line = "";
+						boolean gotchan = false;
 						for(int i = 1; i<lineparts2.length; i++){
-							line += ":"+lineparts2[i];
+							if(gotchan)
+								line += ":"+lineparts2[i];
+							if(line.contains("#")){
+								gotchan = true;
+							}
 						}
 						line = line.substring(1);
 						System.out.print(nickcolor+"["+lineparts[0]+"] "+resetcolor);
