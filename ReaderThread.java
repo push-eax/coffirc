@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Handles reading of received messages from IRC server.
@@ -123,11 +125,12 @@ public class ReaderThread extends Thread {
 				}
 			} else System.out.print(line.charAt(ii));
 		}
-		System.out.println();
 	}
 
 	public void run() {
-		System.out.println("Started run");
+		//System.out.println("Started run");
+		Date cdate = new Date();
+		SimpleDateFormat fdate = new SimpleDateFormat("hh:mm");
 		String lineparts[];
 		String lineparts2[];
 		nickcolor    = "";
@@ -219,12 +222,13 @@ public class ReaderThread extends Thread {
 					}
 					line = line.replace("\001", "");
 					line = line.replace("\002", "");
-					
+					cdate.setTime(System.currentTimeMillis());
+					System.out.print(fdate.format(cdate)+" ");
 					switch(keyword){
 					case 0: //JOIN
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[1].split(":");
-						System.out.println(lineparts[0] + " has joined "+lineparts2[lineparts2.length-1]);
+						System.out.print(lineparts[0] + " has joined "+lineparts2[lineparts2.length-1]);
 						break;
 					case 1: //PRIVMSG
 						lineparts = line.substring(1).split("!");
@@ -252,12 +256,12 @@ public class ReaderThread extends Thread {
 						break;
 					case 2: //PART
 						lineparts = line.substring(1).split("!");
-						System.out.println(lineparts[0] + " left the channel.");
+						System.out.print(lineparts[0] + " left the channel.");
 						break;
 					case 3: //QUIT
 						lineparts = line.substring(1).split("!");
 						lineparts2 = lineparts[lineparts.length-1].split(":");
-						System.out.println(lineparts[0] + " quit ("+lineparts2[lineparts2.length-1]+")");
+						System.out.print(lineparts[0] + " quit ("+lineparts2[lineparts2.length-1]+")");
 						break;
 					case 4: //Topic
 						System.out.print("Topic: ");
@@ -284,7 +288,7 @@ public class ReaderThread extends Thread {
 					case 13: //RPL_LOCALUSERS
 					case 14: //RPL_GLOBALUSERS
 						lineparts = line.split(":");
-						System.out.println(lineparts[lineparts.length-1]);
+						System.out.print(lineparts[lineparts.length-1]);
 						break;
 					case 18: //NOTICE
 						System.out.print("NOTICE ");
@@ -295,17 +299,17 @@ public class ReaderThread extends Thread {
 						for(int i = 3; i<lineparts.length; i++){
 							System.out.print(lineparts[i]+ " ");
 						}
-						System.out.println();
 						break;
 					case 20:
 						lineparts = line.substring(1).split("!");
 						lineparts2 = line.split(":");
-						System.out.println(nickcolor + lineparts[0] + " has changed their nick to " + lineparts2[lineparts2.length-1] + resetcolor);
+						System.out.print(nickcolor + lineparts[0] + " has changed their nick to " + lineparts2[lineparts2.length-1] + resetcolor);
 						break;
 					default:
 						printcolor(line);
 						break;
 					}
+					System.out.println();
 				}
 			}
 			//logfile.close();
