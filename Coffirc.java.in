@@ -3,6 +3,7 @@
 //On fixing existing feature, append/increase letter
 //On simply changing stuff without committing, append -dev
 //When committing, make sure there is no -dev suffix
+#DEFINE version="0.1.7"
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Coffirc {
 		Connection connection = null;
 		//PrintWriter logfile = new PrintWriter(".coffirc.debug.log");
 		
-		System.out.println("coffirc v"+"0.1.7");
+		System.out.println("coffirc v"+$#version#$);
 		
 		//In order to consitantly represent common problems, we should use a list of error
 		//messages for the more standard ones. (ex. not connected)
@@ -44,7 +45,7 @@ public class Coffirc {
 					if ("connect".equals(command)){
 						if (connection == null){
 							if (commArr.length == 3){
-								connection = new Connection(commArr[1], Integer.parseInt(commArr[2]), "0.1.7"); 
+								connection = new Connection(commArr[1], Integer.parseInt(commArr[2]), $#version#$); 
 							}
 							else {	  
 								System.err.println("Usage: /connect <server> <port>");
@@ -121,4 +122,3 @@ public class Coffirc {
 		}
 	}
 }
-
