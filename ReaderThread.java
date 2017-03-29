@@ -208,7 +208,7 @@ public class ReaderThread extends Thread {
 					// Print each line the client receives.
 					logfile.write(line+"\n");
 					logfile.flush();
-					//                    0       1          2       3       4      5      6      7      8      9      10     11     12     13     14     15     16     17     18        19          20
+					//                    0       1          2       3       4      5      6      7      8      9      10     11     12     13     14     15     16     17     18        19      20
 					String keywords[] = {"JOIN", "PRIVMSG", "PART", "QUIT", "332", "333", "353", "366", "375", "372", "005", "251", "255", "265", "266", "252", "253", "254", "NOTICE", "MODE", "NICK"};
 					int keyword = -1;
 					for(int i = 0; i<keywords.length; i++){
@@ -228,11 +228,27 @@ public class ReaderThread extends Thread {
 						break;
 					case 1: //PRIVMSG
 						lineparts = line.substring(1).split("!");
-						lineparts2 = lineparts[lineparts.length-1].split(":");
-						line = lineparts2[lineparts2.length-1];
-						System.out.print(nickcolor+"["+lineparts[0]+"] "+resetcolor);
-						printcolor(line);
-						System.out.print(resetcolor);
+						line = "";
+						for(int i = 1; i<lineparts.length; i++){
+							line += "!"+lineparts[i];
+						}
+						lineparts2 = line.substring(1).split(" ");
+						line = "";
+						boolean gotchan = false;
+						for(int i = 1; i<lineparts2.length; i++){
+							if(gotchan == true)
+								line += " "+lineparts2[i];
+							if(lineparts2[i].contains("PRIVMSG")){
+								i++;
+								gotchan=true;
+							}
+						}
+						if (line.length()>=1){
+							line = line.substring(2);
+							System.out.print(nickcolor+"["+lineparts[0]+"] "+resetcolor);
+							printcolor(line);
+							System.out.print(resetcolor);
+						}
 						break;
 					case 2: //PART
 						lineparts = line.substring(1).split("!");
