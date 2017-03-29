@@ -222,8 +222,20 @@ public class ReaderThread extends Thread {
 					}
 					line = line.replace("\001", "");
 					line = line.replace("\002", "");
-					cdate.setTime(System.currentTimeMillis());
-					System.out.print(fdate.format(cdate)+" ");
+					//This switch JUST to determine when to show date
+					switch(keyword){
+						case 5:
+						case 6:
+						case 7:
+						case 10:
+						case 19:
+							break;
+						default:
+							cdate.setTime(System.currentTimeMillis());
+							System.out.print(fdate.format(cdate)+" ");
+							break;
+					}
+					//standard switch, used for processing each case
 					switch(keyword){
 					case 0: //JOIN
 						lineparts = line.substring(1).split("!");
@@ -309,7 +321,17 @@ public class ReaderThread extends Thread {
 						printcolor(line);
 						break;
 					}
-					System.out.println();
+					//And then this one is to determine whether to add a line break
+					switch(keyword){
+						case 5:
+						case 7:
+						case 10:
+						case 19:
+							break;
+						default:
+							System.out.println();
+							break;
+					}
 				}
 			}
 			//logfile.close();
