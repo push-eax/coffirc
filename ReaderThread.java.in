@@ -1,3 +1,4 @@
+#DEFINE debuglogfile=.coffirc.debug.log
 import java.io.*;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -41,7 +42,7 @@ public class ReaderThread extends Thread {
 		this.reader = reader;
 		this.writer = writer;
 		try{
-			logfile = new PrintWriter(".coffirc.debug.log");
+			logfile = new PrintWriter("$#debuglogfile#$");
 		}
 		catch(FileNotFoundException e){
 			System.err.println("Log file error");
@@ -346,4 +347,3 @@ public class ReaderThread extends Thread {
 		}
 	}
 }
-
